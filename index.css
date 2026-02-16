@@ -1,0 +1,19 @@
+.navBtn:hover{
+    background-color: darkmagenta;
+    color:white;
+    padding:10px;
+    border-radius: 16px;;
+}
+.banner {
+    background-image:linear-gradient(rgba(100,100,100.6), rgba(100,100,100.03)),
+     url("./banner-image.png");
+    background-size: cover;
+    background-position:center;
+    height: 500px;  
+    background-blend-mode:multiply;
+
+}
+.car
+{
+    margin-top:-100px;
+}
