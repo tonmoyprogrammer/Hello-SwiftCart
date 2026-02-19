@@ -48,7 +48,9 @@
     </ul>
   </div>
   <div class="navbar-end">
-    <span class="item-containe" class="text-2xl font bold" ><i class="fa-solid fa-cart-arrow-down "></i> 0</span>
+    <p class="text-2xl font bold" ><i class="fa-solid fa-cart-arrow-down "></i> <span id="total-price">0
+
+    </span></p>
   </div>
 </div>
 </header>
@@ -114,16 +116,28 @@
   </div>
 </section>
 
+
 <!-- Main Section  -->
  <main class="bg-white w-full shadow-md py-15">
   <section class="w-10/12 mx-auto ">
     <h1 class="text-3xl font-bold ">Trending Now</h1>
 
+     <!-- Spinner -->
+ <div id = "spinner" class="my-20 w-10/12 mx-auto grid items-center justify-center hidden">
+ <span class="loading loading-dots loading-lg"></span>
+ </div>
+
   <div id="cart-container" class="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-7">
     
   </div>
+
+
+
   </section>
  </main>
+ 
+
+
 
  <!-- Open the modal using ID.showModal() method -->
 <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
@@ -140,6 +154,62 @@
     </div>
   </div>
 </dialog>
+
+<footer class=" bg-black">
+  <div class=" p-15 flex justify-between text-gray-700">
+
+      <div class="space-y-3">
+        <h1 class="text-3xl font-semibold text-violet-400">SwiftCart</h1>
+        <p class="">Your one-stop shor for all your fashion<br> and lifestyle
+          needs.Quality products ,fast <br>delivery and execellent support.
+        </p>
+
+      </div>
+
+      <div class="space-y-3">
+        <h6 class="font-semibold">QUICK LINKS</h6>
+        <div class="space-y-2">
+          <p class="">Home</p>
+        <p class="">Products</p>
+        <p class="">About</p>
+        <p class="">Contact</p>
+        </div>
+
+      </div>
+
+      <div class="space-y-3">
+        <p class="font-semibold">SUPPORT</p>
+
+       <div class="space-y-2">
+         <p>FAQ</p>
+        <p>Shipping</p>
+        <p>Returns</p>
+        <p>Privacy Policy</p>
+       </div>
+
+      </div>
+
+      <div class="space-y-3">
+        <p class="">SUBSCRIBE TO OUR NEWSLETTER</p>
+
+        <p class="space-y-3">The latest news,articles and resources send to your inbox weekly</p>
+        <div class="flex gap-5 items-center">
+          <label for="email"></label>
+          <input id="input-btn" type="email" class="py-2 border-none text-center shadow-xl
+          bg-white rounded-xl" id="email" placeholder="enter your email" required>
+          <button id="sub-btn" class="btn btn-primary  ">Subscribe</button>
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+  </div>
+</footer>
 
     <script src="index.js"></script>
 </body>

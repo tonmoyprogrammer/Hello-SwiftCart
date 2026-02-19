@@ -11,7 +11,7 @@ const loadShowmodal =(id)=>
     const fetchData = `https://fakestoreapi.com/products/${id}`
     fetch(fetchData)
     .then(res => res.json())
-    .then(data => displayShowmodal(data))
+    .then(data => {displayShowmodal(data)})
 }
 const displayShowmodal = (product)=>
 {
@@ -56,11 +56,13 @@ const displayShowmodal = (product)=>
  
 }
 
+//  
 const displayProducts =(products)=>
 {
+    manageSpinner(true)
     
     const cartContainer = document.getElementById("cart-container");
-        // cartContainer.innerHTML="";
+        cartContainer.innerHTML="";
 
 
 //  category: "men's clothing"
@@ -81,20 +83,20 @@ const displayProducts =(products)=>
 
        <div class="p-10 space-y-4">
         <div class="flex justify-between " >
-        <p class=" bg-[#BADEFF40] py-2 px-5 font-semibold *:rounded-2xl text-violet-700" >${product.category}</p>
+        <p class="carts bg-[#BADEFF40] py-2 px-5 font-semibold rounded-2xl text-violet-700" >${product.category}</p>
         <p class="text-gray-600" ><i class="fa-regular fa-star "></i> ${product.rating.rate} 
         <span> (${product.rating.count})</p>
         </div>
 
         <p class="font-semibold text-2xl text-gray-600">${product.title}</p>
-        <p class="font-2xl font-bold"><i class="fa-solid fa-dollar-sign">${product.price}</i></p>
+        <p id ="price${product.id}" class="font-2xl font-bold"><i class="fa-solid fa-dollar-sign">${product.price}</i></p>
 
         <div class="flex justify-between gap-2.5 "> 
         <button onClick="loadShowmodal(${product.id})" class="btn px-10 rounded-2xl text-gray-500"><i class="fa-solid fa-eye"></i>
             Details
         </button>
 
-        <button class="btn btn-primary px-10 rounded-2xl "><i class="fa-solid fa-cart-arrow-down"></i>
+        <button id="cart-btn-${product.id}"  onClick="addCart(${product.id})"class="btn btn-primary px-10 rounded-2xl cartBtn"><i class="fa-solid fa-cart-arrow-down"></i>
           Add
         </button>
         </div>
@@ -104,6 +106,79 @@ const displayProducts =(products)=>
         
         `
         cartContainer.appendChild(cart)
+        
+        
       });
+      manageSpinner(false)
 }
-loadProducts();
+
+const removeBg = ()=>
+{
+    const allbtn = document.querySelectorAll(".cartBtn");
+    allbtn.forEach(btn=>btn.classList.remove("btnClick"))
+}
+
+const addCart = (id)=>
+    {
+       let  showmoney = document.getElementById("total-price").innerText
+        fetch(`https://fakestoreapi.com/products/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            removeBg();
+            const btn = document.getElementById(`cart-btn-${id}`)
+         if(btn)
+         {
+               btn.classList.add("btnClick")
+         }
+            
+            showCart(data)
+        } )
+    }
+
+    const showCart = (price)=>
+    {
+        let  showmoney = document.getElementById("total-price");
+        const newTotal = parseFloat(showmoney.innerText);
+
+      const totalmoney = newTotal + price.price;
+      showmoney.innerText = totalmoney.toFixed(2);
+    //   alert("Added Successfuly");
+    }
+        
+        
+        
+        
+        loadProducts();
+document.getElementById("sub-btn").addEventListener(("click"),(e)=>
+{
+    
+    const input = document.getElementById("input-btn");
+    const inputValue = input.value;
+    if(inputValue.trim() !== "")
+    {
+        window.location.href = "index.html"
+    
+
+    }
+    else{
+        alert("something error")
+    }
+})
+
+
+// Manage spinner
+const manageSpinner = (status)=>
+{
+    const spinner = document.getElementById("spinner");
+    const cartContainer = document.getElementById("cart-container");
+    if(status)
+    {
+        spinner.classList.remove("hidden");
+        cartContainer.classList.add("hidden")
+    }
+    else{
+        spinner.classList.add("hidden")
+        cartContainer.classList.remove("hidden");
+    }
+
+}
